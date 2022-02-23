@@ -31,7 +31,8 @@ def main():
             hashes = '\t'.join(filter(None, calc_hashlib(file.rstrip('\r\n'), chosen)))
             with open("hashed.tsv", 'a', encoding='utf-8') as fout:
                 filet = file.rstrip('\r\n')
-                data = filet, crc, hashes
+                filesize = str(os.stat(filet).st_size)
+                data = filet, filesize, crc, hashes
                 fout.write("\t".join(filter(None, data)))
                 fout.write("\n")
 
